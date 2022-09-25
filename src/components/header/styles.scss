@@ -24,6 +24,7 @@
         font-size: 15px;
         margin-left: 20px;
         color: #344054;
+        margin-bottom: 3px;
       }
       &-pagename::before {
         content: "";
@@ -34,6 +35,28 @@
         top: 0px;
         left: -19px;
         transform: rotate(20deg);
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    &-top {
+      &-left {
+        &-logo {
+          margin: 8px;
+          width: 80px;
+          //   height: 100px;
+        }
+        &-pagename {
+          font-size: 12px;
+          margin-left: 10px;
+          margin-bottom: 2px;
+        }
+        &-pagename::before {
+          width: 2px;
+          height: 14px;
+          top: 2px;
+          left: -12px;
+        }
       }
     }
   }

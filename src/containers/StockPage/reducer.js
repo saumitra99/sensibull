@@ -2,7 +2,7 @@ import STOCKS_CONSTANTS from "./constants";
 
 const initialState = {
   stocksInstruments: null,
-  stocksLoading: false,
+  stocksLoading: true,
   stocksError: false,
 };
 
@@ -18,7 +18,7 @@ const stocksReducer = (state = initialState, action) => {
         ...state,
         stocksLoading: false,
         stocksInstruments: action.data,
-        stocksError: true,
+        stocksError: false,
       };
     case STOCKS_CONSTANTS.STOCKS_INSTRUMENT_FAILURE:
       return {

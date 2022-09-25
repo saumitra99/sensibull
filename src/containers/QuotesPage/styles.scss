@@ -1,0 +1,52 @@
+.quotes-page {
+  margin: 50px;
+  border-radius: 12px;
+  background: #e0e0e0;
+  // box-shadow: 16px 16px 32px #afafaf, -16px -16px 32px #ffffff;
+  background: #fff;
+
+  .ant-table-pagination.ant-pagination {
+    margin: 16px 8px;
+    background: #fff;
+  }
+  @media screen and (max-width: 768px) {
+    margin: 10px;
+  }
+}
+
+.pulse {
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(137, 133, 142, 0.4);
+  animation: pulse 2s infinite;
+  border-radius: 12px;
+}
+.pulse:hover {
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 199, 182, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(198, 193, 175, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 199, 182, 0.4);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rrgba(198, 193, 175, 0);
+    box-shadow: 0 0 0 0 rrgba(198, 193, 175, 0);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 10px rgba(204, 199, 182, 0.4);
+    box-shadow: 0 0 0 10px rgba(204, 199, 182, 0.4);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(204, 199, 182, 0.4);
+    box-shadow: 0 0 0 0 rgba(204, 199, 182, 0.4);
+  }
+}

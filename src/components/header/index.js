@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
+import capitalizeFirstLetter from "../../helpers/common";
 
 function header({ children }) {
   return (
@@ -31,7 +32,10 @@ function header({ children }) {
               </svg>
             </div>
           </a>
-          <h1 className="Header-top-left-pagename">Easy Options</h1>
+          <h1 className="Header-top-left-pagename">
+            {capitalizeFirstLetter(window?.location?.pathname.split("/")[1]) ||
+              "Home"}
+          </h1>
         </div>
       </div>
       {children && children}

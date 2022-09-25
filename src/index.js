@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import SensibullApp from "./Routes";
 import wfStore from "./store/configureStore";
+import "./common.scss";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

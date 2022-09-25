@@ -1,11 +1,23 @@
 .progress-wrapper {
   height: 100vh;
-  .logo {
-    width: 200px;
-    height: 200px;
-  }
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 100;
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    .logo {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }

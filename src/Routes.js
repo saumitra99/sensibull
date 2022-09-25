@@ -8,7 +8,6 @@ import {
   Redirect,
   withRouter,
 } from "react-router-dom";
-import("./common.scss");
 
 const StockPage = lazy(() => import("./containers/StockPage"));
 const QuotesPage = lazy(() => import("./containers/QuotesPage"));
@@ -31,7 +30,7 @@ function Routes() {
       <Suspense fallback={<PageLoader />}>
         <Switch>
           <Header>
-            {routes.map((route) => (
+            {routes?.map((route) => (
               <Route
                 key={route.id}
                 path={route.path}

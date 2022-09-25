@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 import { stocksInstrumentRequest } from "./actions";
 import Papa from "papaparse";
 import PageLoader from "../../components/PageLoader";
 import ErrorPage from "../ErrorPage";
 import "./styles.scss";
+import useWindowSize from "../../helpers/useWindowSize";
 
 let backupTableData = [];
 function Stock() {
@@ -15,6 +16,7 @@ function Stock() {
   const stocksError = useSelector((state) => state?.stocks.stocksErrors);
   const [instrumentData, setInstrumentData] = useState(null);
   const [instrumentDataColumns, setInstrumentDataColumns] = useState(null);
+  const [width] = useWindowSize();
   const [searchParams, setSearchParams] = useState("");
   const stocksInstrument = useSelector(
     (state) => state?.stocks.stocksInstruments
@@ -30,12 +32,8 @@ function Stock() {
     console.log(backupTableData, "backupTableData");
     const fuse = new Fuse(backupTableData, searchOptions);
     if (e.target.value) {
-      const filteredTable = fuse
-        .search(e.target.value)
-        ?.sort((prev, curr) => curr.score - prev.score)
-        ?.map((i) => i.item);
+      const filteredTable = fuse.search(e.target.value)?.map((i) => i.item);
       setInstrumentData(filteredTable);
-      console.log(filteredTable, "fuse.search('tion')");
     } else {
       setInstrumentData(backupTableData);
     }
@@ -54,21 +52,31 @@ function Stock() {
         header: true,
         skipEmptyLines: true,
         complete: function (results) {
-          console.log(Object.keys(results?.data[0]), "stocksInstrument");
+          // this will get all the unique columns and save it in a state
           const tempTableData = Object.keys(results?.data[0])?.map((i) => ({
             title: i,
             dataIndex: i,
             key: i,
             render:
               i === "Symbol"
-                ? (text) => <a onClick={() => console.log(text)}>{text}</a>
+                ? (text) => (
+                    <a
+                      onClick={() =>
+                        (window.location.href = `/quotes?symbol=${text}`)
+                      }
+                    >
+                      {text}
+                    </a>
+                  )
                 : null,
           }));
-          backupTableData = results?.data;
-          // this will get all the unique columns and save it in a state
+          backupTableData = results?.data?.map((i) => ({
+            ...i,
+            Validtill: new Date(`${i.Validtill} UTC`).toString(),
+          }));
           setInstrumentDataColumns(tempTableData);
           // this will save the parsed table data in a state
-          setInstrumentData(results?.data);
+          setInstrumentData(backupTableData);
         },
       });
     }
@@ -76,7 +84,11 @@ function Stock() {
   }, [stocksInstrument]);
 
   const StocksTable = () => (
-    <Table dataSource={instrumentData} columns={instrumentDataColumns}></Table>
+    <Table
+      dataSource={instrumentData}
+      columns={instrumentDataColumns}
+      size={width < 768 ? "small" : "medium"}
+    ></Table>
   );
 
   return (
@@ -85,7 +97,7 @@ function Stock() {
         <ErrorPage />
       ) : (
         <>
-          {stocksLoading && !instrumentData ? (
+          {stocksLoading || !instrumentData ? (
             <PageLoader />
           ) : (
             <div className="stocks-instruments">
