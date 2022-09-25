@@ -1,3 +1,29 @@
 .stocks-instruments {
-  margin: 50px;
+  &-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      width: 52%;
+      border: 1px solid #dadbdc;
+      margin-top: 14px;
+      border-radius: 5px;
+      height: 39px;
+      padding: 10px;
+    }
+  }
+  &-table {
+    margin: 50px;
+  }
+  @media screen and (max-width: 768px) {
+    &-search {
+      input {
+        width: 72%;
+      }
+    }
+    &-table {
+      overflow: auto;
+      margin: 10px 0px 10px 10px;
+    }
+  }
 }
