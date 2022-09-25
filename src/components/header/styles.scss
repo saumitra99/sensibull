@@ -1,0 +1,40 @@
+.Header {
+  &-top {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    background: #fff;
+    justify-content: flex-start;
+    align-items: center;
+    height: 65px;
+    border-bottom: 1px solid #dadbdc;
+    &-left {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &-logo {
+        margin: 15px;
+        width: 120px;
+        //   height: 100px;
+      }
+      &-pagename {
+        position: relative;
+        font-size: 15px;
+        margin-left: 20px;
+        color: #344054;
+      }
+      &-pagename::before {
+        content: "";
+        width: 2px;
+        height: 24px;
+        background-color: grey;
+        position: absolute;
+        top: 0px;
+        left: -19px;
+        transform: rotate(20deg);
+      }
+    }
+  }
+}

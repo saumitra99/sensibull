@@ -8,6 +8,17 @@
 # testing
 /coverage
 
+# build files
+build
+dist
+~/.nvm
+
+# env file
+.env-cmdrc
+
+#eslint cache
+.eslintcache
+
 # production
 /build
 
