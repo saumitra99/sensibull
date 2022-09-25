@@ -6,6 +6,7 @@ import { Table } from "antd";
 import PageLoader from "../../components/PageLoader";
 import capitalizeFirstLetter, { PriceFormat } from "../../helpers/common";
 import "./styles.scss";
+import ErrorPage from "../ErrorPage";
 
 let firstTime = true;
 let runningIntervalId;
@@ -103,12 +104,18 @@ function Quotes() {
 
   return (
     <div>
-      {firstTime && quotesLoading ? (
-        <PageLoader />
+      {quotesError ? (
+        <ErrorPage />
       ) : (
-        <div className={`quotes-page ${quotesLoading && `pulse`}`}>
-          <QuotesTable />
-        </div>
+        <>
+          {firstTime && quotesLoading ? (
+            <PageLoader />
+          ) : (
+            <div className={`quotes-page ${quotesLoading && `pulse`}`}>
+              <QuotesTable />
+            </div>
+          )}
+        </>
       )}
     </div>
   );
